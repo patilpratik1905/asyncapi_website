@@ -1,6 +1,6 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
+import { Highlight } from 'prism-react-renderer';
 import React, { useState } from 'react';
-import Highlight from 'react-syntax-highlighter';
 
 import Caption from '../Caption';
 import IconClipboard from '../icons/Clipboard';
@@ -34,146 +34,63 @@ interface Theme {
   };
 }
 
-const theme: Theme = {
-  hljs: {
-    display: 'inline-block',
-    background: '#252f3f',
-    color: '#c0e2a3'
-  },
-  'hljs-subst': {
-    color: '#d6deeb'
-  },
-  'hljs-selector-tag': {
-    color: '#ff6363'
-  },
-  'hljs-selector-id': {
-    color: '#fad430',
-    fontWeight: 'bold'
-  },
-  'hljs-selector-class': {
-    color: '#7edcda'
-  },
-  'hljs-selector-attr': {
-    color: '#7edcda'
-  },
-  'hljs-selector-pseudo': {
-    color: '#74e287'
-  },
-  'hljs-addition': {
-    backgroundColor: 'rgba(163, 190, 140, 0.5)'
-  },
-  'hljs-deletion': {
-    backgroundColor: 'rgba(191, 97, 106, 0.5)'
-  },
-  'hljs-built_in': {
-    color: '#7edcda'
-  },
-  'hljs-type': {
-    color: '#7edcda'
-  },
-  'hljs-class': {
-    color: '#7edcda'
-  },
-  'hljs-function': {
-    color: '#74e287'
-  },
-  'hljs-function > .hljs-title': {
-    color: '#74e287'
-  },
-  'hljs-keyword': {
-    color: '#64a0dc'
-  },
-  'hljs-literal': {
-    color: '#64a0dc'
-  },
-  'hljs-symbol': {
-    color: '#64a0dc'
-  },
-  'hljs-number': {
-    color: '#d8da68'
-  },
-  'hljs-regexp': {
-    color: '#EBCB8B'
-  },
-  'hljs-string': {
+// Custom theme based on your existing color scheme
+const customTheme = {
+  plain: {
     color: '#c0e2a3',
-    fontWeight: '500'
+    backgroundColor: '#252f3f'
   },
-  'hljs-title': {
-    color: '#7edcda'
-  },
-  'hljs-params': {
-    color: '#d6deeb'
-  },
-  'hljs-bullet': {
-    color: '#64a0dc'
-  },
-  'hljs-code': {
-    color: '#7edcda'
-  },
-  'hljs-emphasis': {
-    fontStyle: 'italic'
-  },
-  'hljs-formula': {
-    color: '#7edcda'
-  },
-  'hljs-strong': {
-    fontWeight: 'bold'
-  },
-  'hljs-link:hover': {
-    textDecoration: 'underline'
-  },
-  'hljs-quote': {
-    color: '#797f8c'
-  },
-  'hljs-comment': {
-    color: '#797f8c'
-  },
-  'hljs-doctag': {
-    color: '#7edcda'
-  },
-  'hljs-$ref': {
-    color: 'yellow'
-  },
-  'hljs-meta': {
-    color: '#5E81AC'
-  },
-  'hljs-meta-keyword': {
-    color: '#5E81AC'
-  },
-  'hljs-meta-string': {
-    color: '#c0e2a3'
-  },
-  'hljs-attr': {
-    color: '#7edcda'
-  },
-  'hljs-attribute': {
-    color: '#d6deeb'
-  },
-  'hljs-builtin-name': {
-    color: '#64a0dc'
-  },
-  'hljs-name': {
-    color: '#64a0dc'
-  },
-  'hljs-section': {
-    color: '#74e287'
-  },
-  'hljs-tag': {
-    color: '#64a0dc'
-  },
-  'hljs-variable': {
-    color: '#d6deeb'
-  },
-  'hljs-template-variable': {
-    color: '#d6deeb'
-  },
-  'hljs-template-tag': {
-    color: '#5E81AC'
-  },
-  'yaml .hljs-meta': {
-    color: '#D08770'
-  }
+  styles: [
+    {
+      types: ['comment', 'prolog', 'doctype', 'cdata'],
+      style: {
+        color: '#797f8c'
+      }
+    },
+    {
+      types: ['punctuation'],
+      style: {
+        color: '#d6deeb'
+      }
+    },
+    {
+      types: ['property', 'tag', 'boolean', 'number', 'constant', 'symbol', 'deleted'],
+      style: {
+        color: '#64a0dc'
+      }
+    },
+    {
+      types: ['selector', 'attr-name', 'string', 'char', 'builtin', 'inserted'],
+      style: {
+        color: '#c0e2a3',
+        fontWeight: '500' as const
+      }
+    },
+    {
+      types: ['operator', 'entity', 'url', 'variable'],
+      style: {
+        color: '#d6deeb'
+      }
+    },
+    {
+      types: ['atrule', 'attr-value', 'function', 'class-name'],
+      style: {
+        color: '#74e287'
+      }
+    },
+    {
+      types: ['keyword'],
+      style: {
+        color: '#64a0dc'
+      }
+    },
+    {
+      types: ['regex', 'important'],
+      style: {
+        color: '#EBCB8B'
+      }
+    }
+  ]
 };
 
 /**
@@ -241,6 +158,10 @@ export default function CodeBlock({
    * @description This function renders the syntax-highlighted code blocks.
    */
   function renderHighlight() {
+    const currentBlock = codeBlocks && codeBlocks[activeBlock];
+    const codeLanguage = currentBlock?.language || language;
+    const codeContent = currentBlock?.code || '';
+
     return (
       <div className='h-full max-h-screen'>
         {codeBlocks && codeBlocks.length > 1 && (
@@ -262,53 +183,51 @@ export default function CodeBlock({
         )}
 
         <div className={`relative overflow-y-auto pr-8 ${highlightClassName}`}>
-          <Highlight
-            className={`pb-2 pt-px text-sm font-medium font-ligatures-contextual
-              ${showLineNumbers ? 'ml-0' : 'ml-3'} ${textSizeClassName}`}
-            language={codeBlocks && codeBlocks[activeBlock].language ? codeBlocks[activeBlock].language : language}
-            style={theme}
-            showLineNumbers={showLineNumbers}
-            startingLineNumber={startingLineNumber}
-            lineNumberContainerStyle={{
-              paddingLeft: '0.5em',
-              background: '#252f3f'
-            }}
-            lineNumberStyle={(lineNumber: number) => {
-              const isHighlighted = highlightedLines?.includes(lineNumber);
+          <Highlight theme={customTheme} code={codeContent} language={codeLanguage as any}>
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <pre
+                className={`pb-2 pt-px text-sm font-medium font-ligatures-contextual ${showLineNumbers ? 'ml-0' : 'ml-3'
+                  } ${textSizeClassName} ${className} mr-8`}
+                style={style}
+              >
+                {tokens.map((line, i) => {
+                  const lineNumber = i + startingLineNumber;
+                  const isHighlighted = highlightedLines?.includes(lineNumber);
 
-              const styles: React.CSSProperties = {
-                display: 'inline-block',
-                marginLeft: '16px',
-                paddingRight: '16px',
-                backgroundColor: isHighlighted ? '#3e4d64' : '#252f3f',
-                color: isHighlighted ? '#A3ACAD' : '#8B9394'
-              };
-
-              return styles;
-            }}
-            wrapLines={true}
-            lineProps={(lineNumber: number) => {
-              const isHighlighted = highlightedLines?.includes(lineNumber);
-
-              const style: React.CSSProperties = {
-                paddingRight: '2rem'
-              };
-
-              if (isHighlighted) {
-                style.display = 'block';
-                style.width = '100%';
-                style.backgroundColor = '#3e4d64';
-              }
-
-              return {
-                style
-              };
-            }}
-            codeTagProps={{
-              className: 'mr-8'
-            }}
-          >
-            {codeBlocks ? [codeBlocks[activeBlock].code] : ''}
+                  return (
+                    <div
+                      key={i}
+                      {...getLineProps({ line })}
+                      style={{
+                        display: 'block',
+                        paddingRight: '2rem',
+                        backgroundColor: isHighlighted ? '#3e4d64' : 'transparent'
+                      }}
+                    >
+                      {showLineNumbers && (
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            marginLeft: '16px',
+                            paddingRight: '16px',
+                            minWidth: '2em',
+                            textAlign: 'right',
+                            userSelect: 'none',
+                            backgroundColor: isHighlighted ? '#3e4d64' : '#252f3f',
+                            color: isHighlighted ? '#A3ACAD' : '#8B9394'
+                          }}
+                        >
+                          {lineNumber}
+                        </span>
+                      )}
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token })} />
+                      ))}
+                    </div>
+                  );
+                })}
+              </pre>
+            )}
           </Highlight>
         </div>
       </div>

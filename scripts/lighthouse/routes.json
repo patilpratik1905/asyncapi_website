@@ -1,0 +1,168 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "name": "Home"
+    },
+    {
+      "path": "/404",
+      "name": "404 Error Page"
+    },
+    {
+      "path": "/finance",
+      "name": "Finance"
+    },
+    {
+      "path": "/newsletter",
+      "name": "Newsletter"
+    },
+    {
+      "path": "/roadmap",
+      "name": "Roadmap"
+    },
+    {
+      "path": "/blog",
+      "name": "Blog Index"
+    },
+    {
+      "path": "/casestudies",
+      "name": "Case Studies Index"
+    },
+    {
+      "path": "/community",
+      "name": "Community Home"
+    },
+    {
+      "path": "/community/ambassadors",
+      "name": "Community Ambassadors"
+    },
+    {
+      "path": "/community/board",
+      "name": "Community Board"
+    },
+    {
+      "path": "/community/dashboard",
+      "name": "Community Dashboard"
+    },
+    {
+      "path": "/community/events",
+      "name": "Community Events"
+    },
+    {
+      "path": "/community/events-and-updates",
+      "name": "Community Events & Updates"
+    },
+    {
+      "path": "/community/newsroom",
+      "name": "Community Newsroom"
+    },
+    {
+      "path": "/community/tsc",
+      "name": "Community TSC"
+    },
+    {
+      "path": "/docs",
+      "name": "Docs Home"
+    },
+    {
+      "path": "/docs/concepts",
+      "name": "Docs Concepts"
+    },
+    {
+      "path": "/docs/concepts/asyncapi-document",
+      "name": "Docs AsyncAPI Document"
+    },
+    {
+      "path": "/docs/concepts/application",
+      "name": "Docs Application Concept"
+    },
+    {
+      "path": "/docs/concepts/channel",
+      "name": "Docs Channel Concept"
+    },
+    {
+      "path": "/docs/concepts/message",
+      "name": "Docs Message Concept"
+    },
+    {
+      "path": "/docs/concepts/server",
+      "name": "Docs Server Concept"
+    },
+    {
+      "path": "/docs/guides",
+      "name": "Docs Guides"
+    },
+    {
+      "path": "/docs/guides/message-validation",
+      "name": "Docs Message Validation Guide"
+    },
+    {
+      "path": "/docs/migration",
+      "name": "Docs Migration"
+    },
+    {
+      "path": "/docs/migration/migrating-to-v3",
+      "name": "Docs Migrating to v3"
+    },
+    {
+      "path": "/docs/reference",
+      "name": "Docs Reference"
+    },
+    {
+      "path": "/docs/reference/specification/v3.0.0",
+      "name": "Docs Spec v3.0.0"
+    },
+    {
+      "path": "/docs/tools",
+      "name": "Docs Tools"
+    },
+    {
+      "path": "/docs/tools/cli",
+      "name": "Docs CLI Tool"
+    },
+    {
+      "path": "/docs/tools/generator",
+      "name": "Docs Generator Tool"
+    },
+    {
+      "path": "/docs/tutorials",
+      "name": "Docs Tutorials"
+    },
+    {
+      "path": "/docs/tutorials/getting-started",
+      "name": "Docs Getting Started Tutorial"
+    },
+    {
+      "path": "/docs/tutorials/create-asyncapi-document",
+      "name": "Docs Create AsyncAPI Document"
+    },
+    {
+      "path": "/docs/community",
+      "name": "Docs Community"
+    },
+    {
+      "path": "/tools",
+      "name": "Tools Index"
+    },
+    {
+      "path": "/tools/cli",
+      "name": "Tools CLI"
+    },
+    {
+      "path": "/tools/generator",
+      "name": "Tools Generator"
+    },
+    {
+      "path": "/tools/github-actions",
+      "name": "Tools GitHub Actions"
+    },
+    {
+      "path": "/tools/modelina",
+      "name": "Tools Modelina"
+    },
+    {
+      "path": "/tools/parsers",
+      "name": "Tools Parsers"
+    }
+  ]
+}

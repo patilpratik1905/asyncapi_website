@@ -22,19 +22,6 @@ interface CodeBlockProps {
   title?: string;
 }
 
-interface Theme {
-  [key: string]: {
-    display?: string;
-    background?: string;
-    color?: string;
-    fontWeight?: string | number;
-    backgroundColor?: string;
-    fontStyle?: string;
-    textDecoration?: string;
-  };
-}
-
-// Custom theme based on your existing color scheme
 const customTheme = {
   plain: {
     color: '#c0e2a3',
@@ -184,10 +171,10 @@ export default function CodeBlock({
 
         <div className={`relative overflow-y-auto pr-8 ${highlightClassName}`}>
           <Highlight theme={customTheme} code={codeContent} language={codeLanguage as any}>
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            {({ className: codeClassName, style, tokens, getLineProps, getTokenProps }) => (
               <pre
                 className={`pb-2 pt-px text-sm font-medium font-ligatures-contextual ${showLineNumbers ? 'ml-0' : 'ml-3'
-                  } ${textSizeClassName} ${className} mr-8`}
+                  } ${textSizeClassName} ${codeClassName} mr-8`}
                 style={style}
               >
                 {tokens.map((line, i) => {

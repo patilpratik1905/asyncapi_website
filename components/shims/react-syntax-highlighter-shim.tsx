@@ -51,6 +51,7 @@ const prismLightTheme = {
 };
 
 interface SyntaxHighlighterProps {
+
   /** Programming language (Schyma always passes 'json') */
   language?: string;
 
